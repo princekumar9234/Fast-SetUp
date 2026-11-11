@@ -347,3 +347,35 @@ export async function updatePass(req, res) {
       "Password has been reset successfully. Please login with your new password.",
   });
 }
+
+
+export async function userGetMe(req, res) {
+  try {
+    // 1. Cookie se refreshToken nikalein
+    const token = req.cookies.refreshToken;
+
+    if (!token) {
+      return res.status(401).json({ message: "Not authenticated" });
+    }
+
+    // 2. Token ko verify karke user ID nikalein
+    const decoded = jwt.verify(token, config.JWT_SECRECT);
+
+    // 3. Database se user find karein
+    const user = await userModel.findById(decoded.id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not Found!" });
+    }
+
+    return res.status(200).json({
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    return res.status(401).json({ message: "Invalid or expired token" });
+  }
+}

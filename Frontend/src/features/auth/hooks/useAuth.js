@@ -1,7 +1,7 @@
 import { AuthContext } from "../auth.context";
 import { login,register,getMe,emailVerify } from "../services/auth.api";
 
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 
 export const useAuth = () => {
 
@@ -28,6 +28,8 @@ const handleRegister = async ({ email, password, username }) => {
       setUser(data.user);
     } catch (error) {
       console.log(error);
+      throw error;
+      
     } finally {
       setLoading(false);
     }
@@ -41,7 +43,7 @@ const handleLogin = async ({email, password}) => {
     }
      catch(error){
         console.log(error);
-        throw new Error;
+        throw error;
      }
      finally{
         setLoading(false);

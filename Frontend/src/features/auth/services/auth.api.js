@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const api = await axios.create({
-  baseURL: "http://loacalhost:300",
+const api =  axios.create({
+  baseURL: "http://localhost:3000",
   withCredentials: true,
 });
 
@@ -15,7 +15,7 @@ export async function register({username, email, password}) {
     return response.data;
   } catch(error){
     console.log(error);
-    throw new Error;
+    throw error;
   }
 }
 
@@ -29,6 +29,7 @@ export async function emailVerify({email, otp}) {
 
    } catch (error) {
      console.log(error);
+     throw error;
    }
 }
 
@@ -42,12 +43,23 @@ export async function login({email, password}) {
 
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
 
 export async function getMe() {
   try {
     const response = await api.get("/user/get-me");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function refreshToken() {
+  try {
+    const response = await api.get("/user/refreshToken");
     return response.data;
   } catch (error) {
     console.log(error);

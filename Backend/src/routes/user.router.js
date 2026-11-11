@@ -41,4 +41,12 @@ authRouter.post("/forgetEmail", userController.forgetPass);
  */
 authRouter.post("/updatePassword", userController.updatePass);
 
+/**
+ * GET/user/get-me
+ * @description : - get the current logged in user details
+ */
+authRouter.get("/get-me",  userController.userGetMe);
+
+
+
 export default authRouter;

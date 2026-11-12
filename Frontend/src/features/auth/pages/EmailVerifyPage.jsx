@@ -59,7 +59,7 @@ const EmailVerifyPage = () => {
           {/* Header Tag & Title */}
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-5 h-[2px] bg-[#b91032] inline-block rounded-full"></span>
+              <span className="w-5 h-0.5 bg-[#b91032] inline-block rounded-full"></span>
               <span className="text-xs font-bold tracking-wider text-[#b91032] uppercase">
                 SECURITY VERIFICATION
               </span>

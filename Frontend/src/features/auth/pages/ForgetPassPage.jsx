@@ -29,6 +29,11 @@ const ForgetPassPage = () => {
       );
     }
   };
+   
+  const loginAccount = () => {
+    setError("");
+    navigate("/login")
+  }
 
   return (
     <div className="min-h-screen bg-[#faf8f5] text-neutral-900 flex flex-col justify-center px-4 sm:px-6 py-10 sm:py-14">
@@ -106,7 +111,13 @@ const ForgetPassPage = () => {
                   <ArrowRight size={17} />
                 </>
               )}
-            </button>
+            </button> 
+            <h2>----------------if You have Password ?---------------</h2>
+            <button
+              className="w-full mt-2 py-3.5 px-5 text-white font-semibold text-sm sm:text-base bg-[#b91032] hover:bg-[#a10d2b] active:scale-[0.99] rounded-2xl shadow-xs transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+          onClick={loginAccount}
+                     >
+              Back to Login</button>
           </form>
         </div>
       </div>

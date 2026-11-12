@@ -33,6 +33,17 @@ export async function emailVerify({email, otp}) {
    }
 }
 
+
+export async function logout() {
+  try {
+    const response = await api.get("/user/logout");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
 export async function login({email, password}) {
   try {
      const response =await api.post("/user/login", {
@@ -60,6 +71,35 @@ export async function getMe() {
 export async function refreshToken() {
   try {
     const response = await api.get("/user/refreshToken");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+
+export async function forgetPassword({email}) {
+      
+  try {
+    const response = await api.post("/user/forgetEmail",{
+      email,
+    })
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+
+export async function updatePassword({ email, otp, newPassword }) {
+  try {
+    const response = await api.post("/user/updatePassword", {
+      email,
+      otp,
+      newPassword,
+    });
     return response.data;
   } catch (error) {
     console.log(error);

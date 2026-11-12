@@ -29,7 +29,7 @@ authRouter.get("/logoutall", userController.logoutall);
 /**
  * GET /api/auth/verify-email
  */
-authRouter.get("/verifyEmail", userController.verifyEmail);
+authRouter.post("/emailVerify", userController.verifyEmail);
 
 /**
  * POST /api/auth/forgetEmail

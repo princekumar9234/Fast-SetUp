@@ -4,6 +4,8 @@ import Home from "./features/ai/Home";
 import RegisterPage from "./features/auth/pages/RegisterPage";
 import LoginPage from "./features/auth/pages/LoginPage";
 import EmailVerifyPage from "./features/auth/pages/EmailVerifyPage";
+import ForgetPassPage from "./features/auth/pages/ForgetPassPage";
+import UpdatePassword from "./features/auth/pages/updatePassword";
 
 
 
@@ -25,5 +27,13 @@ export const router = createBrowserRouter([
     {
         path: "/emailVerify",
         element : <EmailVerifyPage/>
+    }, 
+    {
+       path : "/forgetpassword",
+         element : <ForgetPassPage/>
+    }, 
+    {
+        path : "/updatePassword",
+        element : <UpdatePassword/>
     }
 ])

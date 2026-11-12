@@ -1,5 +1,5 @@
 import { AuthContext } from "../auth.context";
-import { login,register,getMe,emailVerify } from "../services/auth.api";
+import { login,register,getMe,emailVerify ,logout,updatePassword,forgetPassword} from "../services/auth.api";
 
 import { useContext, useEffect } from 'react'
 
@@ -50,6 +50,19 @@ const handleLogin = async ({email, password}) => {
      }
 }
 
+ const handleLogout = async () => {
+    setLoading(true);
+    try {
+      const data = await logout();
+      console.log(data);
+      setUser(null);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
  useEffect(() => {
     const getAndSetUser = async () => {
       try{
@@ -67,8 +80,34 @@ const handleLogin = async ({email, password}) => {
   }, []);
 
 
+
+    const handleForgetPassword = async ({ email }) => {
+    setLoading(true);
+    try {
+      const data = await forgetPassword({ email });
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpdatePassword = async ({ email, otp, newPassword }) => {
+    setLoading(true);
+    try {
+      const data = await updatePassword({ email, otp, newPassword });
+      setUser(data.user);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
   return {
-    user, loading, handleLogin, handleRegister , handleEmailVerify
+    user, loading, handleLogin, handleRegister , handleEmailVerify,handleLogout,handleForgetPassword,handleUpdatePassword
   }
 }
 

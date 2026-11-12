@@ -313,39 +313,43 @@ export async function forgetPass(req, res) {
 }
 
 export async function updatePass(req, res) {
-  const { email, otp, newPassword } = req.body;
+  try {
+    const { email, otp, newPassword } = req.body;
 
-  if (!email || !otp || !newPassword) {
-    return res.status(400).json({ message: "All field are required" });
+    if (!email || !otp || !newPassword) {
+      return res.status(400).json({ message: "All field are required" });
+    }
+
+    const otpHash = crypto.createHash("sha256").update(otp).digest("hex");
+    const otpDoc = await otpModel.findOne({ email, otpHash });
+
+    if (!otpDoc) {
+      return res.status(400).json({ message: "OTP expired" });
+    }
+
+    const hashPassword = crypto
+      .createHash("sha256")
+      .update(newPassword)
+      .digest("hex");
+
+    await userModel.findByIdAndUpdate(otpDoc.user, {
+      password: hashPassword,
+    });
+
+    await sessionModel.updateMany(
+      { user: otpDoc.user, revoked: false },
+      { revoked: true },
+    );
+
+    await otpModel.deleteMany({ user: otpDoc.user });
+
+    return res.status(200).json({
+      message: "Password has been reset successfully. Please login with your new password.",
+    });
+  } catch (error) {
+    console.log("Error in updatePass:", error);
+    return res.status(500).json({ message: error.message || "Internal Server Error" });
   }
-
-  const otpHash = crypto.createHash("sha256").update(otp).digest("hex");
-  const otpDoc = await otpModel.findOne({ email, otpHash });
-
-  if (!otpDoc) {
-    return res.status(400).json({ message: "OTP expired" });
-  }
-
-  const hashPassword = crypto
-    .createHash("sha256")
-    .update(newPassword)
-    .digest("hex");
-
-  await userModel.findByIdAndUpdate(otpDoc.user, {
-    password: hashPassword,
-  });
-
-  await sessionModel.updateMany(
-    { user: otpDoc.user, revoked: false },
-    { revoked: true },
-  );
-
-  await otpModel.deleteMany({ user: otpDoc.user });
-
-  return res.status(200).json({
-    message:
-      "Password has been reset successfully. Please login with your new password.",
-  });
 }
 
 

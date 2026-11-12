@@ -29,7 +29,7 @@ const LoginPage = () => {
 
   const forgetPassword = () => {
     setError("");
-    navigate("/forgetPassPage");
+    navigate("/forgetpassword");
   };
 
   return (

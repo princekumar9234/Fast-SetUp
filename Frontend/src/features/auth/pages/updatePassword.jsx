@@ -41,6 +41,11 @@ const UpdatePassword = () => {
     }
   };
 
+  const resendOtp =() => {
+    setError("");
+    navigate("/forgetPassword")
+  }
+
   return (
     <div className="min-h-screen bg-[#faf8f5] text-neutral-900 flex flex-col justify-center px-4 sm:px-6 py-10 sm:py-14">
       {/* Top Brand Logo */}
@@ -60,7 +65,7 @@ const UpdatePassword = () => {
           {/* Header Tag & Title */}
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-5 h-[2px] bg-[#b91032] inline-block rounded-full"></span>
+              <span className="w-5 h-0.5 bg-[#b91032] inline-block rounded-full"></span>
               <span className="text-xs font-bold tracking-wider text-[#b91032] uppercase">
                 SECURITY RESET
               </span>
@@ -195,6 +200,11 @@ const UpdatePassword = () => {
                 </>
               )}
             </button>
+            <button 
+              className="w-full mt-2 py-3.5 px-5 text-white font-semibold text-sm sm:text-base bg-[#b91032] hover:bg-[#a10d2b] active:scale-[0.99] rounded-2xl shadow-xs transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+
+            onClick={resendOtp}
+            >Resent Otp </button>
           </form>
         </div>
       </div>

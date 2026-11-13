@@ -3,7 +3,7 @@ import axios from "axios";
 
 const api =  axios.create({
   // baseURL: "http://localhost:3000",
-  baseURL: import.meta.env.VITE_BACKEND_URL,
+  baseURL : import.meta.env.VITE_BACKEND_URL,
   withCredentials: true,
 });
 
@@ -72,7 +72,7 @@ export async function getMe() {
 
 export async function refreshToken() {
   try {
-    const response = await api.get("/user/refreshToken");
+    const response = await api.get("/user/refreshtoken");
     return response.data;
   } catch (error) {
     console.log(error);

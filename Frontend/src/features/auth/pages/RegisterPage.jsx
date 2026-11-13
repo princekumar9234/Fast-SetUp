@@ -20,7 +20,7 @@ const RegisterPage = () => {
 
     try {
       await handleRegister({ username, email, password });
-      navigate("/emailVErify", { state: { email } });
+      navigate("/emailVerify", { state: { email } });
     } catch (err) {
       setError(
         err.response?.data?.message ||

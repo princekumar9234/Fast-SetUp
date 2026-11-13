@@ -97,8 +97,7 @@ const handleLogin = async ({email, password}) => {
   const handleUpdatePassword = async ({ email, otp, newPassword }) => {
     setLoading(true);
     try {
-      const data = await updatePassword({ email, otp, newPassword });
-      setUser(data.user);
+      await updatePassword({ email, otp, newPassword });
     } catch (error) {
       console.log(error);
       throw error;

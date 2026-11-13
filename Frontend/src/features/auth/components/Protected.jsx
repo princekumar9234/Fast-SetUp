@@ -1,5 +1,5 @@
 
-import { useAuth } from "../auth/hooks/useAuth";
+import { useAuth } from "../hooks/useAuth";
 import { Navigate } from "react-router";
 import { Loader2, Sparkles } from "lucide-react";
 
